@@ -10,7 +10,6 @@ provider:
     name: ${env:DEPLOY_BUCKET}
   environment:
     RAILS_ENV: ${env:RAILS_ENV}
-    RAILS_LOG_TO_STDOUT: ${env:RAILS_LOG_TO_STDOUT}
     RAILS_MASTER_KEY: ${env:RAILS_MASTER_KEY}
 
 functions:
