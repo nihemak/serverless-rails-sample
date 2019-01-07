@@ -14,12 +14,6 @@ provider:
     RAILS_MASTER_KEY: ${env:RAILS_MASTER_KEY}
 
 functions:
-  hello:
-    handler: handler.hello
-    events:
-      - http:
-          method: get
-          path: hello
   app:
     handler: lambda.handler
     events:
