@@ -1,0 +1,17 @@
+version: 0.2
+phases:
+  install:
+    commands:
+      - curl -sL https://rpm.nodesource.com/setup_10.x | bash -
+      - yum install -y nodejs
+      - npm install -g serverless@1.35.1
+  build:
+    commands:
+      - bundle --deployment
+      - serverless deploy
+  post_build:
+    commands:
+      - touch dummy.zip
+artifacts:
+  files:
+    - dummy.zip
