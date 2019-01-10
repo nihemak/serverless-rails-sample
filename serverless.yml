@@ -9,6 +9,7 @@ provider:
   deploymentBucket:
     name: ${env:DEPLOY_BUCKET}
   environment:
+    DYNAMO_PREFIX : ${env:DYNAMO_PREFIX}
     RAILS_ENV: ${env:RAILS_ENV}
     RAILS_MASTER_KEY: ${env:RAILS_MASTER_KEY}
 
