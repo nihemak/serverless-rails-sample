@@ -228,7 +228,9 @@ aws codebuild start-build --project-name ${CODEBUILD_PROJ_NAME} \
 REST_API_ID=$(aws cloudformation describe-stack-resources --stack-name ${SERVICE_STACK_NAME} | jq -r '.StackResources[] | select(.ResourceType == "AWS::ApiGateway::RestApi") | .PhysicalResourceId')
 REST_API_RESOURCE_ID=$(aws apigateway get-resources --rest-api-id ${REST_API_ID} | jq -r '.items[] | select(.path == "/{proxy+}") | .id')
 
-## GET /todos
+## Test Lambda and API Gateway
+
+### GET /todos
 aws apigateway test-invoke-method --rest-api-id ${REST_API_ID} \
                                   --resource-id ${REST_API_RESOURCE_ID} \
                                   --http-method GET \
@@ -236,7 +238,7 @@ aws apigateway test-invoke-method --rest-api-id ${REST_API_ID} \
                                   --headers 'Content-Type=application/json,charset=utf-8'
 # curl -X GET https://${REST_API_ID}.execute-api.${REGION}.amazonaws.com/${STAGE_ENV}/todos
 
-## POST /todos
+### POST /todos
 aws apigateway test-invoke-method --rest-api-id ${REST_API_ID} \
                                   --resource-id ${REST_API_RESOURCE_ID} \
                                   --http-method POST \
@@ -251,7 +253,7 @@ TODO_ID=$(aws apigateway test-invoke-method --rest-api-id ${REST_API_ID} \
                                             --headers 'Content-Type=application/json,charset=utf-8' | jq -r '.body' | jq -r '.[].id')
 # TODO_ID=$(curl -X GET https://${REST_API_ID}.execute-api.${REGION}.amazonaws.com/${STAGE_ENV}/todos | jq -r '.[].id')
 
-## GET /todos/:id
+### GET /todos/:id
 aws apigateway test-invoke-method --rest-api-id ${REST_API_ID} \
                                   --resource-id ${REST_API_RESOURCE_ID} \
                                   --http-method GET \
@@ -259,7 +261,7 @@ aws apigateway test-invoke-method --rest-api-id ${REST_API_ID} \
                                   --headers 'Content-Type=application/json,charset=utf-8'
 # curl -X GET https://${REST_API_ID}.execute-api.${REGION}.amazonaws.com/${STAGE_ENV}/todos/${TODO_ID}
 
-## PUT /todos/:id
+### PUT /todos/:id
 aws apigateway test-invoke-method --rest-api-id ${REST_API_ID} \
                                   --resource-id ${REST_API_RESOURCE_ID} \
                                   --http-method PUT \
@@ -267,7 +269,7 @@ aws apigateway test-invoke-method --rest-api-id ${REST_API_ID} \
                                   --headers 'Content-Type=application/json,charset=utf-8'
 # curl -X PUT https://${REST_API_ID}.execute-api.${REGION}.amazonaws.com/${STAGE_ENV}/todos/${TODO_ID}?text=bar
 
-## DELETE /todos/:id
+### DELETE /todos/:id
 aws apigateway test-invoke-method --rest-api-id ${REST_API_ID} \
                                   --resource-id ${REST_API_RESOURCE_ID} \
                                   --http-method DELETE \
