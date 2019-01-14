@@ -2,6 +2,8 @@
 
 This sample code helps get you started with a simple Rails web api deployed on AWS Lambda and API Gateway by Serverless Framework.
 
+Try Ruby on Rails on AWS Lambda and API Gateway by Serverless Framework: https://nihemak.hatenablog.com/entry/2019/01/15/020222
+
 __Resources that referred to__
 
 serverless-sinatra-sample: https://github.com/aws-samples/serverless-sinatra-sample
